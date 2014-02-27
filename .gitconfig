@@ -1,0 +1,20 @@
+[user]
+	name = Heron Yang
+	email = v6510young88@gmail.com
+[merge]
+	tool = vimdiff
+[core]
+	editor = vim
+	excludesfile = /Users/heron/.gitignore_global
+#[difftool "sourcetree"]
+    #cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+    #path = 
+#[mergetool "sourcetree"]
+    #cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+    #trustExitCode = true
+[merge]
+    tool = kdiff3
+[mergetool]
+	keepBackup = false
+[push]
+	default = matching

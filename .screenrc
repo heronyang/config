@@ -1,0 +1,29 @@
+altscreen on # erase screen when quit apps
+defutf8 on
+defc1 off # treat input chars 128 ~ 159 as control functions
+defflow on
+vbell on
+startup_message off
+
+bindkey ^h prev
+bindkey ^l next
+#bindkey ^t title
+bindkey ^x remove
+
+
+# encoding
+defencoding utf8
+bind b encoding big5 utf8
+bind u encoding utf8 utf8
+defbce on # erase background with current bg color
+#cjkwidth off
+caption always "%{Gk}%-w%<%{=B GK}%n %t%{= kG}%+w%-09="
+hardstatus alwayslastline "%{R}The people who are crazy enough to think they can change the world, are the ones who do.%=%{M}%H  %{G}%D%{Y} %c:%s %{w} %d/%m/%Y"
+
+screen -t root 0
+screen -t home 1
+screen -t work 2
+
+defscrollback 10000
+
+shell /bin/bash
