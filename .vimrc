@@ -1,7 +1,6 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Holder:
 "       Heron Yang
-"
 " Maintainer: 
 "       Amir Salihefendic
 "       http://amix.dk - amix@amix.dk
@@ -126,8 +125,10 @@ set tm=500
 " Enable syntax highlighting
 syntax enable
 
+syntax enable
+set background=dark
 colorscheme solarized
-set background=dark   "the scheme will decide dark or light
+hi Normal ctermbg=NONE
 
 " Set extra options when running in GUI mode
 if has("gui_running")
@@ -138,7 +139,9 @@ if has("gui_running")
 endif
 
 " Set utf8 as standard encoding and en_US as the standard language
-set encoding=utf8
+set encoding=UTF-8
+set termencoding=UTF-8
+set fileencodings=UTF-8
 
 " Use Unix as the standard file type
 set ffs=unix,dos,mac

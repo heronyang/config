@@ -9,9 +9,6 @@ fi
 WORDS="The time is passing."
 export PS1='\[\e[0;34m\][\@]\[\e[1;33m\]\u@\H \[\e[0;94m\]\w \[\e[4;35m\]'$WORDS'\n\[\e[0;91m\]>> \[\e[0;32m\]\[\e[0;32m\]'
 
-alias sc='/usr/bin/screen'
-alias scr='/usr/bin/screen -r'
-
 # Setting up the color on Mac
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
@@ -29,7 +26,7 @@ export PATH=${PATH}:/Applications/Android\ Studio.app/sdk/tools
 
 force_color_prompt=yes
 
-alias s='/usr/bin/screen -RR'
+alias s='screen -RR'
 
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
@@ -55,8 +52,28 @@ DMCC="140.113.172.164"
 # add django path
 export PATH=/usr/local/lib/python2.7/site-packages/django/bin:$PATH
 
+# vm ip address
+export VM="-p 3022 127.0.0.1"
+
 BIN_DIR=/usr/local/share/python/
 export PATH=$BIN_DIR:$PATH
 
 export PATH=/Users/heron/Program/8051/sdcc/bin:$PATH
 export PATH=/Users/heron/Program/rabbitmq_server-3.2.2/sbin:$PATH
+
+export PATH=/usr/local/sbin:$PATH
+
+export COURSE="/Users/heron/Google Drive/Courses/"
+
+if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
+  . /opt/local/etc/profile.d/bash_completion.sh
+fi
+
+# added by Anaconda 1.9.1 installer
+export PATH="/Users/heron/anaconda/bin:$PATH"
+
+alias i='irssi'
+
+# char encode
+export LANG="zh_TW.UTF-8"
+#export LC_ALL="zh_TW.UTF-8"
