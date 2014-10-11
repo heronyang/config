@@ -12,4 +12,4 @@ web_server:
 	sudo apt-get install apache2
 
 php:
-	sudo aptget install php5 php5-cli libapache2-mod-php5 php5-mcrypt
+	sudo apt-get install php5 php5-cli libapache2-mod-php5 php5-mcrypt
