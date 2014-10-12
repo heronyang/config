@@ -8,6 +8,7 @@ fi
 DMCC_SERVER="dmccstation@unix.it.nctu.edu.tw"
 DMCC="140.113.172.164"
 MAPLE="106.186.30.79"
+RUN="runway@140.113.180.83"
 
 # Environment Settings
 export LC_CTYPE=en_US.UTF-8
@@ -15,7 +16,8 @@ export LC_ALL=en_US.UTF-8
 export LANG="zh_TW.UTF-8"
 
 WORDS="\"CREATE SOMETHING PEOPLE WANT\""
-export PS1='\[\e[0;33m\]\w \[\e[1;34m\]\u@\H \[\e[4;30m\]'$WORDS'\n\[\e[0;91m\]>> \[\e[0;32m\]\[\e[0;32m\]'
+NAME="Heron Yang"
+export PS1='\[\e[0;33m\]\u@\H \[\e[1;34m\]\w \[\e[1;30m\]'$WORDS' \[\e[0;30m\]Heron Yang\n\[\e[0;91m\]>> \[\e[0;32m\]\[\e[0;32m\]'
 
 # Setting up the color on Mac
 export CLICOLOR=1
