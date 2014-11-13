@@ -38,6 +38,7 @@ alias mysqlstart='sudo /usr/local/mysql/support-files/mysql.server start'
 alias mysqlstop='sudo /usr/local/mysql/support-files/mysql.server stop'
 
 ## PATH ##
+export PATH=~/bin:$PATH
 export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
 export PATH=${PATH}:/Applications/Android\ Studio.app/sdk/tools
@@ -68,3 +69,5 @@ fi
 export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 # Finished adapting your PATH environment variable for use with MacPorts.
 
+# mkdir & cd
+function mkcd () { mkdir -p "$@" && eval cd "\"\$$#\""; }
