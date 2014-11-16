@@ -71,3 +71,6 @@ export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 
 # mkdir & cd
 function mkcd () { mkdir -p "$@" && eval cd "\"\$$#\""; }
+
+# timezone (to show right time for me)
+export TZ="/usr/share/zoneinfo/Asia/Taipei"
