@@ -1,63 +1,177 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Holder:
-"       Heron Yang
-" Maintainer: 
-"       Amir Salihefendic
-"       http://amix.dk - amix@amix.dk
+" File: .vimrc
 "
-" Version: 
-"       5.0 - 29/05/12 15:43:36
+" Author: Jake Zimmerman <jake@zimmerman.io>
+" Modified: Heron Yang
 "
-" Blog_post: 
-"       http://amix.dk/blog/post/19691#The-ultimate-Vim-configuration-on-Github
-"
-" Awesome_version:
-"       Get this config, nice color schemes and lots of plugins!
-"
-"       Install the awesome version from:
-"
-"           https://github.com/amix/vimrc
-"
-" Syntax_highlighted:
-"       http://amix.dk/vim/vimrc.html
-"
-" Raw_version: 
-"       http://amix.dk/vim/vimrc.txt
-"
-" Sections:
-"    -> General
-"    -> VIM user interface
-"    -> Colors and Fonts
-"    -> Files and backups
-"    -> Text, tab and indent related
-"    -> Visual mode related
-"    -> Moving around, tabs and buffers
-"    -> Status line
-"    -> Editing mappings
-"    -> vimgrep searching and cope displaying
-"    -> Spell checking
-"    -> Misc
-"    -> Helper functions
-"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" This file is original from a tech talk at Carnegie Mellon University on February 25, 2015, which is given by jez.
+" Refer: https://github.com/jez/vim-as-an-ide
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => General
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Sets how many lines of history VIM has to remember
-set history=700
+" Gotta be first
+set nocompatible
 
-" Enable filetype plugins
+filetype off
 filetype plugin on
-filetype indent on
 
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'gmarik/Vundle.vim'
+
+" ----- Making Vim look good ------------------------------------------
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'tomasr/molokai'
+Plugin 'bling/vim-airline'
+
+" ----- Vim as a programmer's text editor -----------------------------
+Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'scrooloose/syntastic'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-easytags'
+Plugin 'majutsushi/tagbar'
+Plugin 'kien/ctrlp.vim'
+Plugin 'vim-scripts/a.vim'
+
+" ----- Working with Git ----------------------------------------------
+Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-fugitive'
+
+" ----- Other text editing features -----------------------------------
+Plugin 'Raimondi/delimitMate'
+
+" ----- man pages, tmux -----------------------------------------------
+Plugin 'jez/vim-superman'
+Plugin 'christoomey/vim-tmux-navigator'
+
+" ----- Syntax plugins ------------------------------------------------
+Plugin 'jez/vim-c0'
+Plugin 'jez/vim-ispc'
+Plugin 'kchmck/vim-coffee-script'
+
+" Other
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'ervandew/supertab'
+
+Plugin 'plasticboy/vim-markdown'
+
+" ---- Extras/Advanced plugins ----------------------------------------
+" Highlight and strip trailing whitespace
+Plugin 'ntpeters/vim-better-whitespace'
+" Easily surround chunks of text
+Plugin 'tpope/vim-surround'
+" Align CSV files at commas, align Markdown tables, and more
+Plugin 'godlygeek/tabular'
+" Automaticall insert the closing HTML tag
+Plugin 'HTML-AutoCloseTag'
+" Make tmux look like vim-airline (read README for extra instructions)
+"Plugin 'edkolev/tmuxline.vim'
+" All the other syntax plugins I use
+Plugin 'ekalinin/Dockerfile.vim'
+Plugin 'digitaltoad/vim-jade'
+Plugin 'tpope/vim-liquid'
+Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'JulesWang/css.vim' " only necessary if your Vim version < 7.4
+
+call vundle#end()
+
+filetype plugin indent on
+
+" --- General settings ---
+set backspace=indent,eol,start
+set ruler
+set number
+set showcmd
+set incsearch
+set hlsearch
+
+syntax on
+
+set mouse=a
+
+" ----- Plugin-Specific Settings --------------------------------------
+
+" ----- altercation/vim-colors-solarized settings -----
+" Toggle this to "light" for light colorscheme
+set background=dark
+
+" Uncomment the next line if your terminal is not configured for solarized
+"let g:solarized_termcolors=256
+
+" Set the colorscheme
+colorscheme solarized
+
+
+" ----- bling/vim-airline settings -----
+" Always show statusbar
+set laststatus=2
+
+" Fancy arrow symbols, requires a patched font
+" To install a patched font, run over to
+"     https://github.com/abertsch/Menlo-for-Powerline
+" download all the .ttf files, double-click on them and click "Install"
+" Finally, uncomment the next line
+"let g:airline_powerline_fonts = 1
+
+" Show PASTE if in paste mode
+let g:airline_detect_paste=1
+
+" Show airline for tabs too
+let g:airline#extensions#tabline#enabled = 1
+
+
+" ----- jistr/vim-nerdtree-tabs -----
+" Open/close NERDTree Tabs with \t
+nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
+" To have NERDTree always open on startup
+let g:nerdtree_tabs_open_on_console_startup = 1
+
+
+" ----- scrooloose/syntastic settings -----
+let g:syntastic_error_symbol = '✘'
+let g:syntastic_warning_symbol = "▲"
+augroup mySyntastic
+  au!
+  au FileType tex let b:syntastic_mode = "passive"
+augroup END
+
+
+" ----- xolox/vim-easytags settings -----
+" Where to look for tags files
+set tags=./tags;,~/.vimtags
+" Sensible defaults
+let g:easytags_events = ['BufReadPost', 'BufWritePost']
+let g:easytags_async = 1
+let g:easytags_dynamic_files = 2
+let g:easytags_resolve_links = 1
+let g:easytags_suppress_ctags_warning = 1
+
+" ----- majutsushi/tagbar settings -----
+" Open/close tagbar with \b
+nmap <silent> <leader>b :TagbarToggle<CR>
+" Uncomment to open tagbar automatically whenever possible
+"autocmd BufEnter * nested :call tagbar#autoopen(0)
+
+
+" ----- airblade/vim-gitgutter settings -----
+" Required after having changed the colorscheme
+hi clear SignColumn
+" In vim-airline, only display "hunks" if the diff is non-zero
+let g:airline#extensions#hunks#non_zero_only = 1
+
+
+" ----- Raimondi/delimitMate settings -----
+let delimitMate_expand_cr = 1
+augroup mydelimitMate
+  au!
+  au FileType markdown let b:delimitMate_nesting_quotes = ["`"]
+  au FileType tex let b:delimitMate_quotes = ""
+  au FileType tex let b:delimitMate_matchpairs = "(:),[:],{:},`:'"
+  au FileType python let b:delimitMate_nesting_quotes = ['"', "'"]
+augroup END
+
+" ----- Heron ------
 " Set to auto read when a file is changed from the outside
 set autoread
-
-" With a map leader it's possible to do extra key combinations
-" like <leader>w saves the current file
-let mapleader = ","
-let g:mapleader = ","
 
 " Fast saving
 nmap <leader>w :w!<cr>
@@ -123,20 +237,14 @@ set copyindent    " copy the previous indentation on autoindenting
 set number        " always show line numbers
 set shiftwidth=4  " number of spaces to use for autoindenting
 set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
+set smartindent
 
 set undolevels=1000      " use many muchos levels of undo
 set title                " change the terminal's title
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Enable syntax highlighting
-syntax enable
-
-syntax enable
-set background=dark
-colorscheme maroloccio
 hi Normal ctermbg=NONE
 
 " Set extra options when running in GUI mode
@@ -235,6 +343,19 @@ map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
+" eclim
+map \c <ESC>:JavaDocComment<CR>
+map \j <ESC>:Java<CR>
+map \jc <ESC>:JavaCorrect<CR>
+map \jj <ESC>:Java %<CR>
+
+" markdown file
+" map \md <ESC>:!pandoc -V geometry:margin=1in --listings --latex-engine=xelatex % -s --highlight-style pygments -o %<.pdf<CR>:!open %<.pdf<CR>
+map \md <ESC>:!pandoc -V geometry:margin=1in --listings --latex-engine=xelatex -H ~/latex/listings-setup.tex % -s -o %<.pdf<CR>:!open %<.pdf<CR>
+
+map \22 <ESC>:setlocal shiftwidth=2<CR>
+map \cc <ESC>:CtrlPClearCache<CR>
+
 " Specify the behavior when switching between buffers 
 try
   set switchbuf=useopen,usetab,newtab
@@ -259,6 +380,15 @@ set laststatus=2
 
 " Format the status line
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_enable_signs=1
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -561,3 +691,45 @@ nnoremap ; :
 
 " turn on markdown syntax
 au BufRead,BufNewFile *.md set filetype=markdown
+
+" emmet
+let g:user_emmet_settings = {
+\  'php' : {
+\    'extends' : 'html',
+\    'filters' : 'c',
+\  },
+\  'xml' : {
+\    'extends' : 'html',
+\  },
+\  'haml' : {
+\    'extends' : 'html',
+\  },
+\}
+
+let g:user_emmet_expandabbr_key = '<c-j>'
+let g:use_emmet_complete_tag = 1
+
+autocmd FileType html :setlocal sw=2 ts=2 sts=2 " Two spaces for HTML files "
+hi StatusLine ctermbg=grey ctermfg=black
+
+set t_Co=256
+
+nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 2)<CR>
+nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2)<CR>
+
+hi MatchParen cterm=none ctermbg=green ctermfg=blue
+let g:instant_markdown_autostart = 0
+
+" install pathogen.vim
+execute pathogen#infect()
+
+" tagbar, opening Vim with a supported file/files
+" autocmd VimEnter * nested :call tagbar#autoopen(1)
+" If you use multiple tabs and want Tagbar to also open in the current tab when
+" you switch to an already loaded, supported buffer:
+" autocmd BufEnter * nested :call tagbar#autoopen(0)
+" For opening Tagbar also if you open a supported file in an already running Vim:
+" autocmd FileType * nested :call tagbar#autoopen(0)
+
+" turn off mardown folding
+let g:vim_markdown_folding_disabled=1

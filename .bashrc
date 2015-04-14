@@ -15,10 +15,17 @@ VM="root@192.168.63.128"
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export LANG="zh_TW.UTF-8"
+export TERM='xterm-256color'
+if [ -e /usr/share/terminfo/x/xterm-256color ]; then
+    export TERM='xterm-256color'
+else
+    export TERM='xterm-color'
+fi
 
 WORDS="\"CREATE SOMETHING PEOPLE WANT\""
 NAME="Heron Yang"
-export PS1='\[\e[0;33m\]\u@\H \[\e[1;34m\]\w \[\e[1;30m\]'$WORDS' \[\e[0;30m\]Heron Yang\n\[\e[0;91m\]>> \[\e[0;32m\]\[\e[0;32m\]'
+export PS1="\[$(tput sgr0)\]>> \[$(tput sgr0)\]"
+# export PS1='\[\e[0;33m\]\u@\H \[\e[1;34m\]\w \[\e[1;30m\]'$WORDS' \[\e[0;30m\]Heron Yang\n\[\e[0;91m\]>> \[\e[0;32m\]\[\e[0;32m\]'
 
 # Setting up the color on Mac
 export CLICOLOR=1
@@ -53,6 +60,7 @@ export PATH="/usr/local/heroku/bin:$PATH"                                       
 export PATH="/usr/local/mysql/bin/:/usr/local/mysql/support-files/:$PATH"       # mysql
 export PATH=/usr/local/php5/bin:$PATH                                           # php
 export PATH=/Library/Developer/CommandLineTools/usr/bin/:$PATH
+export PATH=/usr/local/gradle/gradle-2.2.1/bin:$PATH                              # gradle
 
 export PYTHONPATH=/usr/local/lib/python2.7/site-packages/:
 
@@ -71,6 +79,3 @@ export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 
 # mkdir & cd
 function mkcd () { mkdir -p "$@" && eval cd "\"\$$#\""; }
-
-# timezone (to show right time for me)
-export TZ="/usr/share/zoneinfo/Asia/Taipei"
