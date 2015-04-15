@@ -72,6 +72,9 @@ Plugin 'tpope/vim-liquid'
 Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'JulesWang/css.vim' " only necessary if your Vim version < 7.4
 
+" Plugin 'vim-pandoc/vim-pandoc'
+" Plugin 'vim-pandoc/vim-pandoc-syntax' 
+
 call vundle#end()
 
 filetype plugin indent on
@@ -352,11 +355,12 @@ map \jj <ESC>:Java %<CR>
 " markdown file
 " map \md <ESC>:!pandoc -V geometry:margin=1in --listings --latex-engine=xelatex % -s --highlight-style pygments -o %<.pdf<CR>:!open %<.pdf<CR>
 map \md <ESC>:!pandoc -V geometry:margin=1in --listings --latex-engine=xelatex -H ~/latex/listings-setup.tex % -s -o %<.pdf<CR>:!open %<.pdf<CR>
+map \s <ESC>:!pandoc -t beamer -V theme:Bergen % -o %<.pdf<CR>:!open %<.pdf<CR>
 
 map \22 <ESC>:setlocal shiftwidth=2<CR>
 map \cc <ESC>:CtrlPClearCache<CR>
 
-" Specify the behavior when switching between buffers 
+" Specify the behavior when switching between buffers
 try
   set switchbuf=useopen,usetab,newtab
   set stal=2
@@ -721,7 +725,7 @@ hi MatchParen cterm=none ctermbg=green ctermfg=blue
 let g:instant_markdown_autostart = 0
 
 " install pathogen.vim
-execute pathogen#infect()
+" execute pathogen#infect()
 
 " tagbar, opening Vim with a supported file/files
 " autocmd VimEnter * nested :call tagbar#autoopen(1)
