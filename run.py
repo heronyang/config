@@ -11,11 +11,12 @@ from subprocess import call
 
 OS = os.name
 SYSTEM = platform.system()
-CONFIG_FILE_DEFAULT_PATH = "config.json"
+DIST = platform.dist()[0]
+CONFIG_FILE_DEFAULT_PATH = 'config.json'
 
-parser = argparse.ArgumentParser(description="Environment Configuration Tool")
+parser = argparse.ArgumentParser(description='Environment Configuration Tool')
 parser.add_argument('-i', '--input',
-        help="set filepath of the config file (default to " + CONFIG_FILE_DEFAULT_PATH +")",
+        help='set filepath of the config file (default to ' + CONFIG_FILE_DEFAULT_PATH +')',
         type=argparse.FileType('r'),
         default=CONFIG_FILE_DEFAULT_PATH)
 args = parser.parse_args()
@@ -35,17 +36,23 @@ def read_config_file():
 def install_packages(config):
 # Mac OS X
     if SYSTEM == 'Darwin':
-        install_packages(config)
+        install_packages_mac(config)
+    elif SYSTEM == 'Linux':
+        if DIST == 'Ubuntu':
+            install_packages_ubuntu(config)
 
-def install_packages(config):
+def install_packages_mac(config):
     print '> your deployeed os: ' + SYSTEM
-    call(["port", "install"] + config["packages"])
+    call(['port', 'install'] + config['packages'])
 
-if __name__ == "__main__":
+def install_packages_ubuntu(config):
+    print '> your deployeed os: ' + SYSTEM
+    call(['apt-get', 'install', '-y'] + config['packages'])
+
+if __name__ == '__main__':
 
 # setup
     permission_check()
-
     config = read_config_file()
 
 # run
