@@ -6,10 +6,15 @@
     ],
     "rc_files": [
         ".vim",
+        ".vimrc",
         ".screenrc",
         ".zshrc",
         ".oh-my-zsh",
         ".COLORS",
         ".zfunctions"
+    ],
+    "commands": [
+        "vim +PluginInstall +qall",
+        "chsh -s /usr/bin/zsh"
     ]
 }

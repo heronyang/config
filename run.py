@@ -3,6 +3,7 @@
 import os, platform
 import json
 import argparse
+import getpass
 
 from IPython.core.debugger import Tracer
 
@@ -29,8 +30,8 @@ def call_decorator(cmd):
     call(cmd)
 
 def permission_check():
-    if os.getuid() != 0:
-        print 'Please execute with root pervilege.'
+    if os.getuid() == 0:
+        print 'Please don\'t execute with root pervilege.'
         os._exit(1)
 
 def read_config_file():
@@ -50,16 +51,21 @@ def install_packages(config):
 
 def install_packages_mac(config):
     print PROMPT + 'your deployeed os: ' + SYSTEM
-    call_decorator(['port', 'install'] + config['packages'])
+    call_decorator(['sudo', 'port', 'install'] + config['packages'])
 
 def install_packages_ubuntu(config):
     print PROMPT + 'your deployeed os: ' + SYSTEM
-    call_decorator(['apt-get', 'install', '-y'] + config['packages'])
+    username = getpass.getuser()
+    call_decorator(['sudo', 'apt-get', 'install', '-y'] + config['packages'])
 
 def deploy_rc_files(config):
     home = expanduser("~")
     for rc_file in config['rc_files']:
         call_decorator(['cp', '-ri', rc_file, home])
+
+def exec_commands(config):
+    for cmd in config['commands']:
+        call_decorator(cmd.split(' '))
 
 if __name__ == '__main__':
 
@@ -70,6 +76,7 @@ if __name__ == '__main__':
 # run
     install_packages(config)
     deploy_rc_files(config)
+    exec_commands(config)
 
 # end
     print 'done.'
