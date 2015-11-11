@@ -1,5 +1,9 @@
 {
-    "apps": [
-        "zsh",
-        ],
+    "packages": [
+        "zsh"
+    ],
+    "rc_files": [
+        ".bashrc",
+        ".zshrc"
+    ]
 }
