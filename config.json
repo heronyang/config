@@ -11,7 +11,8 @@
         ".zshrc",
         ".oh-my-zsh",
         ".COLORS",
-        ".zfunctions"
+        ".zfunctions",
+        ".xterm-256color-italic.terminfo"
     ],
     "commands": [
         "vim +PluginInstall +qall",
