@@ -1,13 +1,11 @@
 UNAME := $(shell uname)
 
-all: basic web_server config
+all: setup
 	@echo "done"
 
-config:
-	cp -r ./.* ~/
-
-basic:
-	sudo apt-get install vim git screen
+setup:
+	git submodule init
+	git submodule update
 
 web_server:
 	sudo apt-get update

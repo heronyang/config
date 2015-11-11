@@ -8,6 +8,7 @@ from IPython.core.debugger import Tracer
 
 from pprint import pprint
 from subprocess import call
+from os.path import expanduser
 
 PROMPT = '>> '
 
@@ -22,6 +23,10 @@ parser.add_argument('-i', '--input',
         type=argparse.FileType('r'),
         default=CONFIG_FILE_DEFAULT_PATH)
 args = parser.parse_args()
+
+def call_decorator(cmd):
+    print PROMPT  + ' '.join(map(str, cmd))
+    call(cmd)
 
 def permission_check():
     if os.getuid() != 0:
@@ -45,15 +50,16 @@ def install_packages(config):
 
 def install_packages_mac(config):
     print PROMPT + 'your deployeed os: ' + SYSTEM
-    call(['port', 'install'] + config['packages'])
+    call_decorator(['port', 'install'] + config['packages'])
 
 def install_packages_ubuntu(config):
     print PROMPT + 'your deployeed os: ' + SYSTEM
-    call(['apt-get', 'install', '-y'] + config['packages'])
+    call_decorator(['apt-get', 'install', '-y'] + config['packages'])
 
 def deploy_rc_files(config):
+    home = expanduser("~")
     for rc_file in config['rc_files']:
-        call(['cp', '-ri', rc_file])
+        call_decorator(['cp', '-ri', rc_file, home])
 
 if __name__ == '__main__':
 

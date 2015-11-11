@@ -5,8 +5,11 @@
         "screen"
     ],
     "rc_files": [
-        ".zshrc",
         ".vim",
-        ".screenrc"
+        ".screenrc",
+        ".zshrc",
+        ".oh-my-zsh",
+        ".COLORS",
+        ".zfunctions"
     ]
 }
