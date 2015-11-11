@@ -9,6 +9,8 @@ from IPython.core.debugger import Tracer
 from pprint import pprint
 from subprocess import call
 
+PROMPT = '>> '
+
 OS = os.name
 SYSTEM = platform.system()
 DIST = platform.dist()[0]
@@ -27,7 +29,7 @@ def permission_check():
         os._exit(1)
 
 def read_config_file():
-    print '> read confie file from: ' + args.input.name
+    print PROMPT + 'read confie file from: ' + args.input.name
     with args.input as config_file:
         config = json.load(config_file)
 
@@ -42,12 +44,16 @@ def install_packages(config):
             install_packages_ubuntu(config)
 
 def install_packages_mac(config):
-    print '> your deployeed os: ' + SYSTEM
+    print PROMPT + 'your deployeed os: ' + SYSTEM
     call(['port', 'install'] + config['packages'])
 
 def install_packages_ubuntu(config):
-    print '> your deployeed os: ' + SYSTEM
+    print PROMPT + 'your deployeed os: ' + SYSTEM
     call(['apt-get', 'install', '-y'] + config['packages'])
+
+def deploy_rc_files(config):
+    for rc_file in config['rc_files']:
+        call(['cp', '-ri', rc_file])
 
 if __name__ == '__main__':
 
@@ -57,6 +63,7 @@ if __name__ == '__main__':
 
 # run
     install_packages(config)
+    deploy_rc_files(config)
 
 # end
     print 'done.'

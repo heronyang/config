@@ -18,5 +18,9 @@ In config.json file, you can name the list of packages you want to install. Ther
 # Run
 
 ```
-./run.py
+sudo ./run.py
 ```
+
+# Notice
+
+- Make sure you've backup your rc files or other setting files if you don't want them to be overwritten. (Our tool should ask you whether you want to overwrite when it's about to happen; however, it's always a good idea to backup them if you want to keep them.)

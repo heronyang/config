@@ -458,10 +458,27 @@ alias mn='TERM=xterm ssh -X mininet@192.168.63.137'
 alias kali='TERM=xterm ssh root@192.168.63.128'
 alias ed='/Users/heron/Program/eclipse/eclimd'
 alias alice='ssh alice@128.2.228.100'
+alias ec2='ssh -i ~/.ssh/keys/heron-ec2-key.pem ubuntu@ec2-54-200-240-117.us-west-2.compute.amazonaws.com'
 
 # Fix insane formatting problem
 stty sane
 
 # Pebble
-export PATH=~/pebble-dev/PebbleSDK-2.9/bin:$PATH
-export PEBBLE_PHONE=192.168.1.125
+export PEBBLE_PHONE=192.168.1.117
+export PEBBLE_PLATFORM=aplite
+# export PATH=~/pebble-dev/PebbleSDK-2.9/bin:$PATH
+export PATH=~/pebble-dev/PebbleSDK-3.0/bin:$PATH
+export PATH=~/android-sdks/tools:$PATH
+export PATH=~/android-sdks/platform-tools:$PATH
+
+alias fuck='eval $(thefuck $(fc -ln -1))'
+# You can use whatever you want as an alias, like for Mondays:
+alias FUCK='fuck'
+
+##
+# Your previous /Users/heron/.bash_profile file was backed up as /Users/heron/.bash_profile.macports-saved_2014-10-18_at_14:47:42
+##
+
+# MacPorts Installer addition on 2014-10-18_at_14:47:42: adding an appropriate PATH variable for use with MacPorts.
+export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+# Finished adapting your PATH environment variable for use with MacPorts.

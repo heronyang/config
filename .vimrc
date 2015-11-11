@@ -72,8 +72,14 @@ Plugin 'tpope/vim-liquid'
 Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'JulesWang/css.vim' " only necessary if your Vim version < 7.4
 
-" Plugin 'vim-pandoc/vim-pandoc'
-" Plugin 'vim-pandoc/vim-pandoc-syntax' 
+Plugin 'vim-pandoc/vim-pandoc'
+Plugin 'vim-pandoc/vim-pandoc-syntax' 
+
+Plugin 'itchyny/calendar.vim'
+
+Plugin 'mhinz/vim-startify'
+Plugin 'powerline/powerline'
+Plugin 'davidoc/taskpaper.vim'
 
 call vundle#end()
 
@@ -347,7 +353,7 @@ map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " eclim
-map \c <ESC>:JavaDocComment<CR>
+map \d <ESC>:JavaDocComment<CR>
 map \j <ESC>:Java<CR>
 map \jc <ESC>:JavaCorrect<CR>
 map \jj <ESC>:Java %<CR>
@@ -359,6 +365,8 @@ map \s <ESC>:!pandoc -t beamer -V theme:Bergen % -o %<.pdf<CR>:!open %<.pdf<CR>
 
 map \22 <ESC>:setlocal shiftwidth=2<CR>
 map \cc <ESC>:CtrlPClearCache<CR>
+
+map \c <ESC>:Calendar<CR>:ToggleWhitespace<CR>
 
 " Specify the behavior when switching between buffers
 try
@@ -450,7 +458,7 @@ vnoremap <silent> <leader>r :call VisualSelection('replace')<CR>
 " To go to the previous search results do:
 "   <leader>p
 "
-map <leader>cc :botright cope<cr>
+" map <leader>cc :botright cope<cr>
 map <leader>co ggVGy:tabnew<cr>:set syntax=qf<cr>pgg
 map <leader>n :cn<cr>
 map <leader>p :cp<cr>
@@ -737,3 +745,29 @@ let g:instant_markdown_autostart = 0
 
 " turn off mardown folding
 let g:vim_markdown_folding_disabled=1
+
+let g:calendar_google_calendar = 1
+
+" NOTE is Here:
+"
+" == Folding ==
+" use zo and zc to fold and unfold in normal mode
+" use zR and zM to fold and unfold all folds
+"
+" zf#j creates a fold from the cursor down # lines.
+" zf/string creates a fold from the cursor to string .
+" zj moves the cursor to the next fold.
+" zk moves the cursor to the previous fold.
+" zo opens a fold at the cursor.
+" zO opens all folds at the cursor.
+" zm increases the foldlevel by one.
+" zM closes all open folds.
+" zr decreases the foldlevel by one.
+" zR decreases the foldlevel to zero -- all folds will be open.
+" zd deletes the fold at the cursor.
+" zE deletes all folds.
+" [z move to start of open fold.
+" ]z move to end of open fold.
+"
+" == Spelling Check ==
+" z= show all the suggestions
