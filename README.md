@@ -15,10 +15,16 @@ Make sure [Mac Ports](https://www.macports.org/) is installed; otherwise, instal
 
 In config.json file, you can name the list of packages you want to install. There will be the input arguments for your package installation tool, such as `apt-get install args`. Sample file is provided in this repo.
 
+## Make
+
+```
+> make
+```
+
 # Run
 
 ```
-sudo ./run.py
+> sudo ./run.py
 ```
 
 # Notice

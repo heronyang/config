@@ -1,3 +1,12 @@
 [submodule ".oh-my-zsh"]
 	path = .oh-my-zsh
 	url = https://github.com/robbyrussell/oh-my-zsh.git
+[submodule ".vim/bundle/Vundle.vim"]
+	path = .vim/bundle/Vundle.vim
+	url = https://github.com/gmarik/Vundle.vim.git
+[submodule ".zfunctions/pure"]
+	path = .zfunctions/pure
+	url = https://github.com/jez/pure
+[submodule ".zfunctions/syntax-highlighting"]
+	path = .zfunctions/syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting
