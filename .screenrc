@@ -18,12 +18,10 @@ bind u encoding utf8 utf8
 defbce on # erase background with current bg color
 #cjkwidth off
 caption always "%{Gk}%-w%<%{=B GK}%n %t%{= kG}%+w%-09="
-hardstatus alwayslastline "%{R}The people who are crazy enough to think they can change the world, are the ones who do.%=%{M}%H  %{G}%D%{Y} %c:%s %{w} %d/%m/%Y"
+# hardstatus alwayslastline "%{G}The people who are crazy enough to think they can change the world, are the ones who do.%=%{M}%H  %{G}%D%{Y} %c:%s %{w} %d/%m/%Y"
 
 screen -t root 0
 screen -t home 1
 screen -t work 2
 
 defscrollback 10000
-
-shell /bin/bash
