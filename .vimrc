@@ -40,17 +40,17 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'Raimondi/delimitMate'
 
 " ----- man pages, tmux -----------------------------------------------
-Plugin 'jez/vim-superman'
-Plugin 'christoomey/vim-tmux-navigator'
+" Plugin 'jez/vim-superman'
+" Plugin 'christoomey/vim-tmux-navigator'
 
 " ----- Syntax plugins ------------------------------------------------
-Plugin 'jez/vim-c0'
-Plugin 'jez/vim-ispc'
-Plugin 'kchmck/vim-coffee-script'
+" Plugin 'jez/vim-c0'
+" Plugin 'jez/vim-ispc'
+" Plugin 'kchmck/vim-coffee-script'
 
 " Other
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'ervandew/supertab'
+" Plugin 'jelera/vim-javascript-syntax'
+" Plugin 'ervandew/supertab'
 
 Plugin 'plasticboy/vim-markdown'
 
@@ -73,13 +73,21 @@ Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'JulesWang/css.vim' " only necessary if your Vim version < 7.4
 
 Plugin 'vim-pandoc/vim-pandoc'
-Plugin 'vim-pandoc/vim-pandoc-syntax' 
+Plugin 'vim-pandoc/vim-pandoc-syntax'
 
 Plugin 'itchyny/calendar.vim'
 
-Plugin 'mhinz/vim-startify'
 Plugin 'powerline/powerline'
 Plugin 'davidoc/taskpaper.vim'
+
+Plugin 'mjbrownie/browser.vim'
+Plugin 'suan/vim-instant-markdown'
+
+Plugin 'walm/jshint.vim'
+Plugin 'Shutnik/jshint2.vim'
+
+Plugin 'keith/swift.vim'
+Plugin 'nikvdp/ejs-syntax'
 
 call vundle#end()
 
@@ -101,13 +109,13 @@ set mouse=a
 
 " ----- altercation/vim-colors-solarized settings -----
 " Toggle this to "light" for light colorscheme
-set background=dark
+" set background=dark
 
 " Uncomment the next line if your terminal is not configured for solarized
 "let g:solarized_termcolors=256
 
 " Set the colorscheme
-colorscheme solarized
+" colorscheme solarized
 
 
 " ----- bling/vim-airline settings -----
@@ -143,6 +151,8 @@ augroup mySyntastic
   au FileType tex let b:syntastic_mode = "passive"
 augroup END
 
+" Since C library dirs may not set properly in same cases, so let's turn syntastic off here.
+let b:syntastic_mode = "passive"
 
 " ----- xolox/vim-easytags settings -----
 " Where to look for tags files
@@ -361,12 +371,14 @@ map \jj <ESC>:Java %<CR>
 " markdown file
 " map \md <ESC>:!pandoc -V geometry:margin=1in --listings --latex-engine=xelatex % -s --highlight-style pygments -o %<.pdf<CR>:!open %<.pdf<CR>
 map \md <ESC>:!pandoc -V geometry:margin=1in --listings --latex-engine=xelatex -H ~/latex/listings-setup.tex % -s -o %<.pdf<CR>:!open %<.pdf<CR>
+map \mm <ESC>:InstantMarkdownPreview<CR>
 map \s <ESC>:!pandoc -t beamer -V theme:Bergen % -o %<.pdf<CR>:!open %<.pdf<CR>
 
 map \22 <ESC>:setlocal shiftwidth=2<CR>
 map \cc <ESC>:CtrlPClearCache<CR>
 
 map \c <ESC>:Calendar<CR>:ToggleWhitespace<CR>
+map \ck <ESC>:SyntasticToggleMode<CR>
 
 " Specify the behavior when switching between buffers
 try
@@ -401,7 +413,6 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_signs=1
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
@@ -565,7 +576,7 @@ set ttymouse=xterm2
 
 nnoremap <silent> <C-t> :TlistToggle<CR>
 
-map \t <ESC>:!pdflatex % && open %<.pdf<CR><CR>
+map \tt <ESC>:!pdflatex % && open %<.pdf<CR><CR>
 
 " Escape/unescape & < > HTML entities in range (default current line).
 function! HtmlEntities(line1, line2, action)
@@ -588,9 +599,9 @@ noremap <silent> \h :Entities 0<CR>
 noremap <silent> \H :Entities 1<CR>
 
 " Hexmode
-nnoremap <C-H> :Hexmode<CR>
-inoremap <C-H> <Esc>:Hexmode<CR>
-vnoremap <C-H> :<C-U>Hexmode<CR>
+nnoremap <leader>h :Hexmode<CR>
+inoremap <leader>h <Esc>:Hexmode<CR>
+vnoremap <leader>h :<C-U>Hexmode<CR>
 
 " ex command for toggling hex mode - define mapping if desired
 command -bar Hexmode call ToggleHex()
@@ -748,6 +759,15 @@ let g:vim_markdown_folding_disabled=1
 
 let g:calendar_google_calendar = 1
 
+set nofoldenable    " disable folding"
+
+" Read Local Vimrc
+"let b:thisdir=expand("%:p:h")
+"let b:vimrc=b:thisdir."/.vimrc"
+"if (filereadable(b:vimrc))
+    "execute "source ".b:vimrc
+"endif
+
 " NOTE is Here:
 "
 " == Folding ==
@@ -771,3 +791,7 @@ let g:calendar_google_calendar = 1
 "
 " == Spelling Check ==
 " z= show all the suggestions
+"
+au BufNewFile,BufRead *.swift set filetype=swift
+au BufNewFile,BufRead *.srt set filetype=srt
+au BufNewFile,BufRead *.ejs set filetype=html
